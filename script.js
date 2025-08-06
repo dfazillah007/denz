@@ -365,22 +365,60 @@ class PomodoroTimer {
     
     playNotificationSound() {
         if (this.settings.soundEnabled) {
-            // Create a simple beep sound
+            // Create a more prominent multi-tone notification sound
             const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioContext.createOscillator();
-            const gainNode = audioContext.createGain();
             
-            oscillator.connect(gainNode);
-            gainNode.connect(audioContext.destination);
+            // First tone - higher pitch
+            const oscillator1 = audioContext.createOscillator();
+            const gainNode1 = audioContext.createGain();
             
-            oscillator.frequency.value = 800;
-            oscillator.type = 'sine';
+            oscillator1.connect(gainNode1);
+            gainNode1.connect(audioContext.destination);
             
-            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            oscillator1.frequency.value = 1000;
+            oscillator1.type = 'square';
             
-            oscillator.start(audioContext.currentTime);
-            oscillator.stop(audioContext.currentTime + 0.5);
+            gainNode1.gain.setValueAtTime(0.4, audioContext.currentTime);
+            gainNode1.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+            
+            oscillator1.start(audioContext.currentTime);
+            oscillator1.stop(audioContext.currentTime + 0.3);
+            
+            // Second tone - lower pitch (after a brief pause)
+            setTimeout(() => {
+                const oscillator2 = audioContext.createOscillator();
+                const gainNode2 = audioContext.createGain();
+                
+                oscillator2.connect(gainNode2);
+                gainNode2.connect(audioContext.destination);
+                
+                oscillator2.frequency.value = 600;
+                oscillator2.type = 'square';
+                
+                gainNode2.gain.setValueAtTime(0.4, audioContext.currentTime);
+                gainNode2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.4);
+                
+                oscillator2.start(audioContext.currentTime);
+                oscillator2.stop(audioContext.currentTime + 0.4);
+            }, 350);
+            
+            // Third tone - highest pitch for emphasis
+            setTimeout(() => {
+                const oscillator3 = audioContext.createOscillator();
+                const gainNode3 = audioContext.createGain();
+                
+                oscillator3.connect(gainNode3);
+                gainNode3.connect(audioContext.destination);
+                
+                oscillator3.frequency.value = 1200;
+                oscillator3.type = 'square';
+                
+                gainNode3.gain.setValueAtTime(0.5, audioContext.currentTime);
+                gainNode3.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                
+                oscillator3.start(audioContext.currentTime);
+                oscillator3.stop(audioContext.currentTime + 0.3);
+            }, 750);
         }
     }
 }
