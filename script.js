@@ -297,7 +297,7 @@ class PomodoroTimer {
     
     // Settings
     openSettings() {
-        this.settingsModal.style.display = 'block';
+        this.settingsModal.style.display = 'flex';
         this.pomodoroTimeInput.value = this.settings.pomodoro;
         this.shortBreakTimeInput.value = this.settings.shortBreak;
         this.longBreakTimeInput.value = this.settings.longBreak;
