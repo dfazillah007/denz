@@ -198,7 +198,7 @@ class PomodoroTimer {
         
         // Update page title
         const userName = this.userNameInput.value || 'User';
-        document.title = `${this.timeDisplay.textContent} - ${userName}'s Pomodoro`;
+        document.title = `${this.timeDisplay.textContent} - Workshop Timer`;
     }
     
     updateSessionInfo() {
