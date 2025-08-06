@@ -11,9 +11,9 @@ class PomodoroTimer {
         this.currentTask = null;
         
         this.settings = {
-            pomodoro: 25,
+            pomodoro: 60,
             shortBreak: 5,
-            longBreak: 15,
+            longBreak: 60,
             autoStart: false,
             soundEnabled: true
         };
